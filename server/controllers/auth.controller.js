@@ -48,8 +48,16 @@ export const signup = async (req, res) => {
       sameSite: "strict", // prevent CSRF attacks
       secure: process.env.NODE_ENV === "production", // prevent man-in-the-middle attacks
     });
-    return res.status(201).json({ message: "User created successfully" });
-    // TODO: send welcome email
+
+    res.status(201).json({ message: "User created successfully" });
+
+    const profileUrl = `${process.env.CLIENT_URL}/profile/${user.username}`;
+
+    try {
+      await sendWelcomeEmail(user.email, user.name, profileUrl);
+    } catch (error) {
+      console.log("Error sending welcome email", error);
+    }
   } catch (error) {
     console.log("Error in signup:", error.message);
     return res.status(500).json({ message: "Internal server error" });
