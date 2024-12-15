@@ -255,3 +255,121 @@ export function createAcceptedEmailConnectionTemplate(
 </html>
     `;
 }
+
+export function createNewCommentEmailTemplate(
+  recipientName,
+  commenterName,
+  postUrl,
+  commentContent
+) {
+  return `
+    <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>New Comment on Your Post</title>
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        .logo {
+          width: 250px;
+          height: 250px;
+        }
+        @media (min-width: 768px) {
+          .logo {
+            width: 500px;
+            height: 500px;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div
+        style="
+          width: 100%;
+          background-color: #f0f0f0;
+          height: 500px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding-bottom: 45px;
+        "
+      >
+        <img src="https://res.cloudinary.com/dqv93ab4n/image/upload/v1734234382/CareerHive_kyjzhf.svg" alt="Career Hive Logo" class="logo" />
+        <h1
+          style="
+            font-family: sans-serif;
+            text-align: center;
+            padding: 0 10px 0 10px;
+          "
+        >
+          New Comment on Your Post
+        </h1>
+      </div>
+      <div style="width: 100%; display: flex; justify-content: center">
+        <div
+          style="
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 40px;
+            font-family: sans-serif;
+            max-width: 678px;
+          "
+        >
+          <h2 style="color: #efb428">Hello ${recipientName},</h2>
+          <p style="padding-top: 20px; line-height: 21px">
+            ${commenterName} has commented on your post
+          </p>
+          <div
+            style="
+              background-color: rgba(202, 191, 191, 0.597);
+              width: 100%;
+              height: auto;
+              padding: 30px;
+              margin-top: 20px;
+              border-radius: 10px;
+            "
+          >
+            "${commentContent}"
+          </div>
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              margin-top: 20px;
+              margin-bottom: 20px;
+            "
+          >
+            <button
+              style="
+                background-color: #efb428;
+                color: black;
+                padding: 16px 24px 16px 24px;
+                border-radius: 20px;
+                border: none;
+                font-size: 18px;
+                cursor: pointer;
+              "
+            >
+            <a href=${postUrl}>View Comment</a>
+            </button>
+          </div>
+          <p style="margin-bottom: 15px">
+            Stay engaged with your network by responding to comments and fostering discussions.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <span>Best regards,</span>
+            <span>The CareerHive Team</span>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+      `;
+}
